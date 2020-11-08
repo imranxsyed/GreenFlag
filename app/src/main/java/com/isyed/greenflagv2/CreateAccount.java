@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.isyed.greenflagv2.utilities.EmailPasswordValidations;
 
 public class CreateAccount extends AppCompatActivity {
 
@@ -33,6 +34,7 @@ public class CreateAccount extends AppCompatActivity {
         password = findViewById(R.id.tiet_password);
         repeatPassword = findViewById(R.id.tiet_repeat_pass);
         nextPage = findViewById(R.id.btn_next);
+        nextPage.setBackground(getDrawable(R.drawable.gradient_button_background));
         erroMessage = findViewById(R.id.tv_error_message);
         tick_icon = getDrawable(R.drawable.tick);
         cross_icon = getDrawable(R.drawable.cross);
@@ -52,16 +54,17 @@ public class CreateAccount extends AppCompatActivity {
                     emailAddress.setBackground(getBaseContext().getDrawable(R.drawable.border));
                     //hide message
                     erroMessage.setVisibility(View.INVISIBLE);
+
                     //clear password field and disable it
                     password.getText().clear();
                     password.setEnabled(false);
-                    password.setCompoundDrawablesRelativeWithIntrinsicBounds(null,null,null,null);
+
                     //clear field icon
                     emailAddress.setCompoundDrawablesRelativeWithIntrinsicBounds(null,null,null,null);
-                   return;
+                    return;
 
                 }
-                boolean isValidEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(s).matches();
+                boolean isValidEmail = EmailPasswordValidations.isEmailValid(s.toString());
 
                 if (isValidEmail){
 
@@ -110,22 +113,21 @@ public class CreateAccount extends AppCompatActivity {
                 if (null == s || s.toString().isEmpty()){
                     //hide error message
                     erroMessage.setVisibility(View.INVISIBLE);
+
                     //empty and disabled the repeat password field
                     repeatPassword.getText().clear();
                     repeatPassword.setEnabled(false);
 
+                    //the state of the password field when the it is cleared
                     password.setBackground(getDrawable(R.drawable.border));
+                    password.setCompoundDrawablesRelativeWithIntrinsicBounds(null,null,null,null);
 
                     return;
                 }
-                String pass = s.toString();
 
-                boolean hasUppercase  = checkForUppercase(pass);
-                boolean hasLowercase  = checkForLowercase(pass);
-                boolean hasEightLetter = s.length() >= 8 ? true : false;
-                boolean hasNumber = checkForNumber(pass);
 
-                boolean isPasswordValid = hasUppercase && hasLowercase && hasEightLetter && hasNumber;
+
+                boolean isPasswordValid = EmailPasswordValidations.checkPasswordCritria(s.toString());
 
                 if (isPasswordValid){
                     //adding tick icon and removing others
@@ -140,10 +142,11 @@ public class CreateAccount extends AppCompatActivity {
                 else{
                     erroMessage.setVisibility(View.VISIBLE);
                     erroMessage.setText("You Password does not match requiremet criteria");
+
                     //empty and disabled the repeat password field
                     repeatPassword.getText().clear();
                     repeatPassword.setEnabled(false);
-                    repeatPassword.setBackground(getDrawable(R.drawable.border));
+
 
 
                     password.setCompoundDrawablesRelativeWithIntrinsicBounds(cross_icon,null,null,null);
@@ -173,6 +176,9 @@ public class CreateAccount extends AppCompatActivity {
                     nextPage.setEnabled(false);
 
                     repeatPassword.setBackground(getDrawable(R.drawable.border));
+                    repeatPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(null,null,null,null);
+
+
                     return;
                 }
                 String pass = password.getText().toString();
@@ -208,56 +214,18 @@ public class CreateAccount extends AppCompatActivity {
         });
         
         nextPage.setOnClickListener(e ->{
+
+            //getInfo From fields
+            String email  = emailAddress.getEditableText().toString();
+            String pass = password.getEditableText().toString();
+
+            //clear fields
+            emailAddress.getEditableText().clear();
+            password.getEditableText().clear();
+            repeatPassword.getEditableText().clear();
+
             startActivity(new Intent(this,AddMoreInfo.class));
         });
-
-    }
-
-    public boolean checkForUppercase(String input){
-
-        if (null == input || input.isEmpty()){
-            return false;
-        }
-
-        for (int i =0; i< input.length(); i++){
-
-            if (Character.isUpperCase(input.charAt(i))){
-                return true;
-            }
-        }
-        return false;
-
-    }
-
-    public boolean checkForLowercase(String input){
-
-        if (null == input || input.isEmpty()){
-            return false;
-        }
-
-        for (int i =0; i< input.length(); i++){
-
-            if (Character.isLowerCase(input.charAt(i))){
-                return true;
-            }
-        }
-        return false;
-
-    }
-
-    public boolean checkForNumber(String input){
-
-        if (null == input || input.isEmpty()){
-            return false;
-        }
-
-        for (int i =0; i< input.length(); i++){
-
-            if (Character.isDigit(input.charAt(i))){
-                return true;
-            }
-        }
-        return false;
 
     }
 

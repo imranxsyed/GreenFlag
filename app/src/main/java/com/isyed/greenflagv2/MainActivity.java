@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         createAccount = findViewById(R.id.btn_create_account);
+        createAccount.setBackground(getDrawable(R.drawable.gradient_button_background));
 
         createAccount.setOnClickListener(e->{
             Intent intent  = new Intent(this, CreateAccount.class );
