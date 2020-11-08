@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateAccount"
+    android:background="@color/black">
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/tiet_repeat_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="8dp"
+        android:drawablePadding="10dp"
+        android:enabled="false"
+        android:hint="@string/repeat_password"
+        android:background="@drawable/border"
+        android:padding="10dp"
+        android:inputType="textPassword"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/tiet_password"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tiet_password"
+        app:layout_constraintTop_toBottomOf="@+id/tiet_password" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/tiet_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="8dp"
+        android:padding="10dp"
+        android:drawablePadding="10dp"
+        android:enabled="false"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/tiet_username"
+        app:layout_constraintStart_toStartOf="@+id/tiet_username"
+        app:layout_constraintTop_toBottomOf="@+id/tiet_username"
+        android:background="@drawable/border"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:inputType="textEmailAddress"
+        android:id="@+id/tiet_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="88dp"
+        android:paddingStart="10dp"
+        android:padding="10dp"
+        android:background="@drawable/border"
+        android:drawablePadding="5dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/email_address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"
+
+        android:textColorHint="@color/white"/>
+
+    <TextView
+        android:id="@+id/editTextTextMultiLine3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:padding="5dp"
+        android:inputType="textMultiLine"
+        android:fontFamily="@font/museosans300"
+        android:textColor="@color/white"
+        android:textSize="10pt"
+        android:text="@string/password_reqs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_error_message" />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="25dp"
+        android:enabled="false"
+        android:text="Create an Account"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/tv_error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:drawableLeft="@drawable/cross"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+
+        android:text="Your Error"
+        android:textSize="10pt"
+        android:textAlignment="center"
+        android:visibility="invisible"
+        android:textColor="#FF0000"
+        android:inputType="textMultiLine"
+        android:background="@drawable/red_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiet_repeat_pass" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
